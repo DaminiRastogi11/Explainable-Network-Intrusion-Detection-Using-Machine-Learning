@@ -1,7 +1,7 @@
 # Explainable Network Intrusion Detection Using Machine Learning
 
 **Course:** CSC532 – Introduction to Machine Learning | University of Illinois Springfield  
-**Author:** Damini (UIN: 677426285)
+**Author:** Damini
 
 ---
 
@@ -13,7 +13,7 @@ This project builds a binary network intrusion detection system using supervised
 
 ## Purpose & Key Functionalities
 
-Traditional rule-based intrusion detection systems fail to catch novel or evolving attacks. This project addresses that gap by training three ML models — Logistic Regression, Random Forest, and XGBoost — on 78 flow-level network features extracted from the CIC-IDS2017 dataset (Canadian Institute for Cybersecurity). The dataset was memory-efficiently loaded from 8 CSV files in 50,000-row chunks, cleaned of duplicates, infinite values, and missing entries, and encoded into binary labels (0 = Benign, 1 = Attack). After hyperparameter tuning with GridSearchCV and stratified cross-validation, XGBoost emerged as the best model with **99.91% accuracy, 99.55% precision, 99.95% recall, 99.75% F1-score, and a perfect 1.0 ROC-AUC**. LIME (Local Interpretable Model-Agnostic Explanations) was applied to the XGBoost model to generate per-prediction feature explanations, making the model transparent and useful for security analysts. The project also includes exploratory data analysis (class distribution, feature histograms, boxplots, and a correlation heatmap) and a fairness discussion tailored to network-traffic classification.
+Traditional rule-based intrusion detection systems fail to catch novel or evolving attacks. This project addresses that gap by training three ML models: Logistic Regression, Random Forest, and XGBoost, on 78 flow-level network features extracted from the CIC-IDS2017 dataset (Canadian Institute for Cybersecurity). The dataset was memory-efficiently loaded from 8 CSV files in 50,000-row chunks, cleaned of duplicates, infinite values, and missing entries, and encoded into binary labels (0 = Benign, 1 = Attack). After hyperparameter tuning with GridSearchCV and stratified cross-validation, XGBoost emerged as the best model with **99.91% accuracy, 99.55% precision, 99.95% recall, 99.75% F1-score, and a perfect 1.0 ROC-AUC**. LIME (Local Interpretable Model-Agnostic Explanations) was applied to the XGBoost model to generate per-prediction feature explanations, making the model transparent and useful for security analysts. The project also includes exploratory data analysis (class distribution, feature histograms, boxplots, and a correlation heatmap) and a fairness discussion tailored to network-traffic classification.
 
 ---
 
@@ -22,7 +22,8 @@ Traditional rule-based intrusion detection systems fail to catch novel or evolvi
 ```
 ├── Damini_Project_Source_code.ipynb   # Main Jupyter notebook (all code)
 ├── DAMINI_FINAL_PROJECT_REPORT.pdf    # Full written report
-└── README.md                          # This file
+├── README.md                          # This file
+└── 
 ```
 
 ---
@@ -54,14 +55,17 @@ pip install pandas numpy scikit-learn xgboost lime matplotlib seaborn
 ## Dataset Setup
 
 1. Download the **CIC-IDS2017** dataset from the Canadian Institute for Cybersecurity:  
-   👉 https://www.unb.ca/cic/datasets/ids-2017.html
+   - go to - https://www.unb.ca/cic/datasets/ids-2017.html
+     or 
+     [https://www.unb.ca/cic/datasets/ids-2017.html](https://cicresearch.ca/CICDataset/CIC-IDS-2017/)
+   - register
+   - in Folder: /CIC-IDS-2017/CSVs
+   - download MachineLearningCSV.zip
 
-2. Download the **MachineLearningCSV.zip** (pre-extracted flow features, not raw PCAPs).
-
-3. Unzip and place all 8 CSV files in a folder accessible to your notebook, e.g.:
+2.  Create a folder named data in the working directory and Unzip and place all 8 CSV files in that. e.g.:
 
    ```
-   /content/drive/MyDrive/CIC-IDS2017/
+   /content/data
    ├── Monday-WorkingHours.pcap_ISCX.csv
    ├── Tuesday-WorkingHours.pcap_ISCX.csv
    ├── Wednesday-workingHours.pcap_ISCX.csv
@@ -71,8 +75,7 @@ pip install pandas numpy scikit-learn xgboost lime matplotlib seaborn
    ├── Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv
    └── Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv
    ```
-
-4. Update the `DATA_DIR` variable at the top of the notebook to point to this folder.
+3. give this folder path in the notebook.
 
 ---
 
@@ -81,9 +84,8 @@ pip install pandas numpy scikit-learn xgboost lime matplotlib seaborn
 ### Option A — Google Colab (Recommended)
 
 1. Upload `Damini_Project_Source_code.ipynb` to Google Colab.
-2. Mount Google Drive and ensure the dataset CSVs are in your Drive.
-3. Update `DATA_DIR` in the first code cell.
-4. Select **Runtime → Run All**.
+2. Upload `DATA` in the Colab.
+3. Select **Runtime → Run All**.
 
 ### Option B — Local Jupyter
 
@@ -92,7 +94,7 @@ pip install pandas numpy scikit-learn xgboost lime matplotlib seaborn
 jupyter notebook Damini_Project_Source_code.ipynb
 ```
 
-Update `DATA_DIR` to your local dataset path, then run all cells in order.
+Update `DATA folder path` to your local dataset path, then run all cells in order.
 
 ---
 
